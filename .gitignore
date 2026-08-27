@@ -1,0 +1,40 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+dist-ssr
+.output
+.vinxi
+.nitro
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Local files
+*.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+.vscode/*
+!.vscode/settings.json
+.idea
+
+# Tooling
+.tanstack
+__unconfig*
+.turbo
+.developer-control-center
+
+# Testing
+coverage
