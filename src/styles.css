@@ -132,3 +132,31 @@
     @apply font-sans;
   }
 }
+
+.boat-hero {
+  background:
+    linear-gradient(180deg, rgb(247 252 255 / 92%), rgb(208 233 249 / 82%)),
+    radial-gradient(ellipse at 72% 18%, rgb(255 255 255 / 92%), transparent 42%);
+}
+
+.boat-wave {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.boat-wave-one {
+  bottom: -46px;
+  height: 120px;
+  background: rgb(151 205 235 / 38%);
+  transform: rotate(-2deg);
+}
+
+.boat-wave-two {
+  bottom: -67px;
+  height: 130px;
+  background: rgb(83 164 211 / 28%);
+  transform: rotate(2deg);
+}

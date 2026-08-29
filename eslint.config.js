@@ -11,10 +11,19 @@ export default [
       'sort-imports': 'off',
       '@typescript-eslint/array-type': 'off',
       '@typescript-eslint/require-await': 'off',
+      // Drizzle types `.returning()` as always-non-empty (`[T, ...T[]]`), so
+      // legitimate not-found guards on DB writes are flagged as unnecessary.
+      '@typescript-eslint/no-unnecessary-condition': 'off',
       'pnpm/json-enforce-catalog': 'off',
     },
   },
   {
-    ignores: ['eslint.config.js', 'prettier.config.js', 'dcc.config.js'],
+    ignores: [
+      'eslint.config.js',
+      'prettier.config.js',
+      'dcc.config.js',
+      // Clerk's skill/template files (created by `clerk init`), not app code
+      '.agents',
+    ],
   },
 ]

@@ -12,7 +12,7 @@ Browser / PWA
      v
 React + TanStack Start
      |
-     +---- Authentication provider (Clerk - proposed)
+     +---- Authentication provider (Clerk)
      |
      +---- Application/server functions
                |
@@ -39,29 +39,23 @@ The initial preference is to keep server behavior with the TanStack Start applic
 
 ## Suggested source organization
 
-The exact structure will be validated when bootstrapping the app. Directionally:
+The exact structure will be validated when bootstrapping the app. Directionally,
+Phase 1 has settled on (plus optional `features/<feature>/` for client UI state):
 
 ```text
 src/
-  components/
-  features/
-    workspaces/
-    members/
-    tasks/
-    documents/
-    meetings/
-    decisions/
-    expenses/
-    bookings/
-    notifications/
-  lib/
-  routes/
+  components/         # UI components (shadcn/ui in components/ui)
+  features/           # client-side feature concerns (e.g. app/workspace-context)
+  hooks/
+  lib/                # shared utilities (e.g. JsonValue type)
+  routes/             # TanStack Router file routes (/app shell + pages)
   server/
-    auth/
-    db/
-    permissions/
-    services/
-  styles/
+    auth/             # Clerk identity abstraction (getAuthInfo)
+    authorization/    # permissions catalog + requireWorkspacePermission
+    api/              # createServerFn boundary (Zod validation + DTOs)
+    <domain>/         # service.ts per domain (workspaces, memberships, tasks…)
+    db/               # drizzle client, schema, migrations, seed
+  styles.css
 ```
 
 If the repository later becomes a monorepo, shared packages can be extracted when real reuse justifies it. Do not start with a complex monorepo solely for hypothetical future applications.

@@ -5,11 +5,12 @@ import {
 } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
 
 import { getThemeInitScript } from '../hooks/use-theme'
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
+import { ClerkProvider } from '@clerk/tanstack-react-start'
+import { env } from '../env'
+import { I18nProvider } from '../lib/i18n'
 
 import appCss from '../styles.css?url'
 
@@ -51,9 +52,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <Header />
-        {children}
-        <Footer />
+        {env.VITE_CLERK_PUBLISHABLE_KEY ? (
+          <ClerkProvider publishableKey={env.VITE_CLERK_PUBLISHABLE_KEY}>
+            <I18nProvider>{children}</I18nProvider>
+          </ClerkProvider>
+        ) : (
+          <I18nProvider>{children}</I18nProvider>
+        )}
         <TanStackDevtools
           config={{
             position: 'bottom-right',

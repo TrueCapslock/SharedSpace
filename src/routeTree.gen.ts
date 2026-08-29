@@ -10,33 +10,362 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/app'
+import { Route as AppIndexRouteImport } from './routes/app/index'
+import { Route as AppAccessRouteImport } from './routes/app/access'
+import { Route as AppBacklogRouteImport } from './routes/app/backlog'
+import { Route as AppBerthsRouteImport } from './routes/app/berths'
+import { Route as AppBoardRouteImport } from './routes/app/board'
+import { Route as AppCabinInfoRouteImport } from './routes/app/cabin-info'
+import { Route as AppDocumentsRouteImport } from './routes/app/documents'
+import { Route as AppInsightsRouteImport } from './routes/app/insights'
+import { Route as AppInventoryRouteImport } from './routes/app/inventory'
+import { Route as AppLogbookRouteImport } from './routes/app/logbook'
+import { Route as AppMembersRouteImport } from './routes/app/members'
+import { Route as AppMessagesRouteImport } from './routes/app/messages'
+import { Route as AppMetersRouteImport } from './routes/app/meters'
+import { Route as AppNotificationsRouteImport } from './routes/app/notifications'
+import { Route as AppProfileRouteImport } from './routes/app/profile'
+import { Route as AppResidentsRouteImport } from './routes/app/residents'
+import { Route as AppResourcesRouteImport } from './routes/app/resources'
+import { Route as AppRisksRouteImport } from './routes/app/risks'
+import { Route as AppRoadmapRouteImport } from './routes/app/roadmap'
+import { Route as AppSettingsRouteImport } from './routes/app/settings'
+import { Route as AppSprintsRouteImport } from './routes/app/sprints'
+import { Route as AppTasksRouteImport } from './routes/app/tasks'
+import { Route as AppTimeRouteImport } from './routes/app/time'
+import { Route as AppUtilitiesRouteImport } from './routes/app/utilities'
+import { Route as SignInSplatRouteImport } from './routes/sign-in.$'
+import { Route as SignUpSplatRouteImport } from './routes/sign-up.$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAccessRoute = AppAccessRouteImport.update({
+  id: '/access',
+  path: '/access',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBacklogRoute = AppBacklogRouteImport.update({
+  id: '/backlog',
+  path: '/backlog',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBerthsRoute = AppBerthsRouteImport.update({
+  id: '/berths',
+  path: '/berths',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBoardRoute = AppBoardRouteImport.update({
+  id: '/board',
+  path: '/board',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCabinInfoRoute = AppCabinInfoRouteImport.update({
+  id: '/cabin-info',
+  path: '/cabin-info',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDocumentsRoute = AppDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInsightsRoute = AppInsightsRouteImport.update({
+  id: '/insights',
+  path: '/insights',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInventoryRoute = AppInventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLogbookRoute = AppLogbookRouteImport.update({
+  id: '/logbook',
+  path: '/logbook',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMembersRoute = AppMembersRouteImport.update({
+  id: '/members',
+  path: '/members',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMessagesRoute = AppMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMetersRoute = AppMetersRouteImport.update({
+  id: '/meters',
+  path: '/meters',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNotificationsRoute = AppNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppResidentsRoute = AppResidentsRouteImport.update({
+  id: '/residents',
+  path: '/residents',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppResourcesRoute = AppResourcesRouteImport.update({
+  id: '/resources',
+  path: '/resources',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRisksRoute = AppRisksRouteImport.update({
+  id: '/risks',
+  path: '/risks',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRoadmapRoute = AppRoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSprintsRoute = AppSprintsRouteImport.update({
+  id: '/sprints',
+  path: '/sprints',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTasksRoute = AppTasksRouteImport.update({
+  id: '/tasks',
+  path: '/tasks',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTimeRoute = AppTimeRouteImport.update({
+  id: '/time',
+  path: '/time',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppUtilitiesRoute = AppUtilitiesRouteImport.update({
+  id: '/utilities',
+  path: '/utilities',
+  getParentRoute: () => AppRoute,
+} as any)
+const SignInSplatRoute = SignInSplatRouteImport.update({
+  id: '/sign-in/$',
+  path: '/sign-in/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignUpSplatRoute = SignUpSplatRouteImport.update({
+  id: '/sign-up/$',
+  path: '/sign-up/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/app/access': typeof AppAccessRoute
+  '/app/backlog': typeof AppBacklogRoute
+  '/app/berths': typeof AppBerthsRoute
+  '/app/board': typeof AppBoardRoute
+  '/app/cabin-info': typeof AppCabinInfoRoute
+  '/app/documents': typeof AppDocumentsRoute
+  '/app/insights': typeof AppInsightsRoute
+  '/app/inventory': typeof AppInventoryRoute
+  '/app/logbook': typeof AppLogbookRoute
+  '/app/members': typeof AppMembersRoute
+  '/app/messages': typeof AppMessagesRoute
+  '/app/meters': typeof AppMetersRoute
+  '/app/notifications': typeof AppNotificationsRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/residents': typeof AppResidentsRoute
+  '/app/resources': typeof AppResourcesRoute
+  '/app/risks': typeof AppRisksRoute
+  '/app/roadmap': typeof AppRoadmapRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/sprints': typeof AppSprintsRoute
+  '/app/tasks': typeof AppTasksRoute
+  '/app/time': typeof AppTimeRoute
+  '/app/utilities': typeof AppUtilitiesRoute
+  '/sign-in/$': typeof SignInSplatRoute
+  '/sign-up/$': typeof SignUpSplatRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app/access': typeof AppAccessRoute
+  '/app/backlog': typeof AppBacklogRoute
+  '/app/berths': typeof AppBerthsRoute
+  '/app/board': typeof AppBoardRoute
+  '/app/cabin-info': typeof AppCabinInfoRoute
+  '/app/documents': typeof AppDocumentsRoute
+  '/app/insights': typeof AppInsightsRoute
+  '/app/inventory': typeof AppInventoryRoute
+  '/app/logbook': typeof AppLogbookRoute
+  '/app/members': typeof AppMembersRoute
+  '/app/messages': typeof AppMessagesRoute
+  '/app/meters': typeof AppMetersRoute
+  '/app/notifications': typeof AppNotificationsRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/residents': typeof AppResidentsRoute
+  '/app/resources': typeof AppResourcesRoute
+  '/app/risks': typeof AppRisksRoute
+  '/app/roadmap': typeof AppRoadmapRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/sprints': typeof AppSprintsRoute
+  '/app/tasks': typeof AppTasksRoute
+  '/app/time': typeof AppTimeRoute
+  '/app/utilities': typeof AppUtilitiesRoute
+  '/sign-in/$': typeof SignInSplatRoute
+  '/sign-up/$': typeof SignUpSplatRoute
+  '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/app/access': typeof AppAccessRoute
+  '/app/backlog': typeof AppBacklogRoute
+  '/app/berths': typeof AppBerthsRoute
+  '/app/board': typeof AppBoardRoute
+  '/app/cabin-info': typeof AppCabinInfoRoute
+  '/app/documents': typeof AppDocumentsRoute
+  '/app/insights': typeof AppInsightsRoute
+  '/app/inventory': typeof AppInventoryRoute
+  '/app/logbook': typeof AppLogbookRoute
+  '/app/members': typeof AppMembersRoute
+  '/app/messages': typeof AppMessagesRoute
+  '/app/meters': typeof AppMetersRoute
+  '/app/notifications': typeof AppNotificationsRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/residents': typeof AppResidentsRoute
+  '/app/resources': typeof AppResourcesRoute
+  '/app/risks': typeof AppRisksRoute
+  '/app/roadmap': typeof AppRoadmapRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/sprints': typeof AppSprintsRoute
+  '/app/tasks': typeof AppTasksRoute
+  '/app/time': typeof AppTimeRoute
+  '/app/utilities': typeof AppUtilitiesRoute
+  '/sign-in/$': typeof SignInSplatRoute
+  '/sign-up/$': typeof SignUpSplatRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/app/access'
+    | '/app/backlog'
+    | '/app/berths'
+    | '/app/board'
+    | '/app/cabin-info'
+    | '/app/documents'
+    | '/app/insights'
+    | '/app/inventory'
+    | '/app/logbook'
+    | '/app/members'
+    | '/app/messages'
+    | '/app/meters'
+    | '/app/notifications'
+    | '/app/profile'
+    | '/app/residents'
+    | '/app/resources'
+    | '/app/risks'
+    | '/app/roadmap'
+    | '/app/settings'
+    | '/app/sprints'
+    | '/app/tasks'
+    | '/app/time'
+    | '/app/utilities'
+    | '/sign-in/$'
+    | '/sign-up/$'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/app/access'
+    | '/app/backlog'
+    | '/app/berths'
+    | '/app/board'
+    | '/app/cabin-info'
+    | '/app/documents'
+    | '/app/insights'
+    | '/app/inventory'
+    | '/app/logbook'
+    | '/app/members'
+    | '/app/messages'
+    | '/app/meters'
+    | '/app/notifications'
+    | '/app/profile'
+    | '/app/residents'
+    | '/app/resources'
+    | '/app/risks'
+    | '/app/roadmap'
+    | '/app/settings'
+    | '/app/sprints'
+    | '/app/tasks'
+    | '/app/time'
+    | '/app/utilities'
+    | '/sign-in/$'
+    | '/sign-up/$'
+    | '/app'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/app/access'
+    | '/app/backlog'
+    | '/app/berths'
+    | '/app/board'
+    | '/app/cabin-info'
+    | '/app/documents'
+    | '/app/insights'
+    | '/app/inventory'
+    | '/app/logbook'
+    | '/app/members'
+    | '/app/messages'
+    | '/app/meters'
+    | '/app/notifications'
+    | '/app/profile'
+    | '/app/residents'
+    | '/app/resources'
+    | '/app/risks'
+    | '/app/roadmap'
+    | '/app/settings'
+    | '/app/sprints'
+    | '/app/tasks'
+    | '/app/time'
+    | '/app/utilities'
+    | '/sign-in/$'
+    | '/sign-up/$'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
+  SignInSplatRoute: typeof SignInSplatRoute
+  SignUpSplatRoute: typeof SignUpSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,21 +377,270 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/access': {
+      id: '/app/access'
+      path: '/access'
+      fullPath: '/app/access'
+      preLoaderRoute: typeof AppAccessRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/backlog': {
+      id: '/app/backlog'
+      path: '/backlog'
+      fullPath: '/app/backlog'
+      preLoaderRoute: typeof AppBacklogRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/berths': {
+      id: '/app/berths'
+      path: '/berths'
+      fullPath: '/app/berths'
+      preLoaderRoute: typeof AppBerthsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/board': {
+      id: '/app/board'
+      path: '/board'
+      fullPath: '/app/board'
+      preLoaderRoute: typeof AppBoardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/cabin-info': {
+      id: '/app/cabin-info'
+      path: '/cabin-info'
+      fullPath: '/app/cabin-info'
+      preLoaderRoute: typeof AppCabinInfoRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/documents': {
+      id: '/app/documents'
+      path: '/documents'
+      fullPath: '/app/documents'
+      preLoaderRoute: typeof AppDocumentsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/insights': {
+      id: '/app/insights'
+      path: '/insights'
+      fullPath: '/app/insights'
+      preLoaderRoute: typeof AppInsightsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/inventory': {
+      id: '/app/inventory'
+      path: '/inventory'
+      fullPath: '/app/inventory'
+      preLoaderRoute: typeof AppInventoryRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/logbook': {
+      id: '/app/logbook'
+      path: '/logbook'
+      fullPath: '/app/logbook'
+      preLoaderRoute: typeof AppLogbookRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/members': {
+      id: '/app/members'
+      path: '/members'
+      fullPath: '/app/members'
+      preLoaderRoute: typeof AppMembersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/messages': {
+      id: '/app/messages'
+      path: '/messages'
+      fullPath: '/app/messages'
+      preLoaderRoute: typeof AppMessagesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/meters': {
+      id: '/app/meters'
+      path: '/meters'
+      fullPath: '/app/meters'
+      preLoaderRoute: typeof AppMetersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/notifications': {
+      id: '/app/notifications'
+      path: '/notifications'
+      fullPath: '/app/notifications'
+      preLoaderRoute: typeof AppNotificationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/profile': {
+      id: '/app/profile'
+      path: '/profile'
+      fullPath: '/app/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/residents': {
+      id: '/app/residents'
+      path: '/residents'
+      fullPath: '/app/residents'
+      preLoaderRoute: typeof AppResidentsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/resources': {
+      id: '/app/resources'
+      path: '/resources'
+      fullPath: '/app/resources'
+      preLoaderRoute: typeof AppResourcesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/risks': {
+      id: '/app/risks'
+      path: '/risks'
+      fullPath: '/app/risks'
+      preLoaderRoute: typeof AppRisksRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/roadmap': {
+      id: '/app/roadmap'
+      path: '/roadmap'
+      fullPath: '/app/roadmap'
+      preLoaderRoute: typeof AppRoadmapRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/sprints': {
+      id: '/app/sprints'
+      path: '/sprints'
+      fullPath: '/app/sprints'
+      preLoaderRoute: typeof AppSprintsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/tasks': {
+      id: '/app/tasks'
+      path: '/tasks'
+      fullPath: '/app/tasks'
+      preLoaderRoute: typeof AppTasksRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/time': {
+      id: '/app/time'
+      path: '/time'
+      fullPath: '/app/time'
+      preLoaderRoute: typeof AppTimeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/utilities': {
+      id: '/app/utilities'
+      path: '/utilities'
+      fullPath: '/app/utilities'
+      preLoaderRoute: typeof AppUtilitiesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/sign-in/$': {
+      id: '/sign-in/$'
+      path: '/sign-in/$'
+      fullPath: '/sign-in/$'
+      preLoaderRoute: typeof SignInSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sign-up/$': {
+      id: '/sign-up/$'
+      path: '/sign-up/$'
+      fullPath: '/sign-up/$'
+      preLoaderRoute: typeof SignUpSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppAccessRoute: typeof AppAccessRoute
+  AppBacklogRoute: typeof AppBacklogRoute
+  AppBerthsRoute: typeof AppBerthsRoute
+  AppBoardRoute: typeof AppBoardRoute
+  AppCabinInfoRoute: typeof AppCabinInfoRoute
+  AppDocumentsRoute: typeof AppDocumentsRoute
+  AppInsightsRoute: typeof AppInsightsRoute
+  AppInventoryRoute: typeof AppInventoryRoute
+  AppLogbookRoute: typeof AppLogbookRoute
+  AppMembersRoute: typeof AppMembersRoute
+  AppMessagesRoute: typeof AppMessagesRoute
+  AppMetersRoute: typeof AppMetersRoute
+  AppNotificationsRoute: typeof AppNotificationsRoute
+  AppProfileRoute: typeof AppProfileRoute
+  AppResidentsRoute: typeof AppResidentsRoute
+  AppResourcesRoute: typeof AppResourcesRoute
+  AppRisksRoute: typeof AppRisksRoute
+  AppRoadmapRoute: typeof AppRoadmapRoute
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppSprintsRoute: typeof AppSprintsRoute
+  AppTasksRoute: typeof AppTasksRoute
+  AppTimeRoute: typeof AppTimeRoute
+  AppUtilitiesRoute: typeof AppUtilitiesRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAccessRoute: AppAccessRoute,
+  AppBacklogRoute: AppBacklogRoute,
+  AppBerthsRoute: AppBerthsRoute,
+  AppBoardRoute: AppBoardRoute,
+  AppCabinInfoRoute: AppCabinInfoRoute,
+  AppDocumentsRoute: AppDocumentsRoute,
+  AppInsightsRoute: AppInsightsRoute,
+  AppInventoryRoute: AppInventoryRoute,
+  AppLogbookRoute: AppLogbookRoute,
+  AppMembersRoute: AppMembersRoute,
+  AppMessagesRoute: AppMessagesRoute,
+  AppMetersRoute: AppMetersRoute,
+  AppNotificationsRoute: AppNotificationsRoute,
+  AppProfileRoute: AppProfileRoute,
+  AppResidentsRoute: AppResidentsRoute,
+  AppResourcesRoute: AppResourcesRoute,
+  AppRisksRoute: AppRisksRoute,
+  AppRoadmapRoute: AppRoadmapRoute,
+  AppSettingsRoute: AppSettingsRoute,
+  AppSprintsRoute: AppSprintsRoute,
+  AppTasksRoute: AppTasksRoute,
+  AppTimeRoute: AppTimeRoute,
+  AppUtilitiesRoute: AppUtilitiesRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
+  SignInSplatRoute: SignInSplatRoute,
+  SignUpSplatRoute: SignUpSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
+import type { startInstance } from './start.ts'
 declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
   }
 }

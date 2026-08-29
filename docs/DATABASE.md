@@ -114,12 +114,40 @@ All schema changes must use version-controlled migrations. Production schema mus
 
 ## ORM / query layer
 
-Not yet selected. Evaluate options based on:
+**Decision: Drizzle ORM** (with `postgres-js` driver).
 
-- TanStack Start/server runtime compatibility
-- Type safety
-- Migration quality
-- SQL transparency
-- PostgreSQL support
-- Serverless connection behavior
-- Ability to express authorization-safe queries clearly
+- Selected over the initially-considered "TanStack DB" reactive client-side store, which is not a server-side ORM (no schema/migrations/SQL). For a multi-tenant web app a real server-side query layer is required.
+- Type-safe queries, strong PostgreSQL support, and version-controlled migrations via `drizzle-kit`.
+- Serverless-friendly: postgres-js client uses `prepare: false`, required for Neon-style transaction pooling.
+
+Migration workflow:
+
+```bash
+npm run db:generate   # create a new migration from changes to src/server/db/schema.ts
+npm run db:migrate    # apply migrations (drizzle-kit, CLI)
+npm run db:migrate:run# apply migrations at runtime (drizzle-orm migrator, for serverless)
+npm run db:push       # dev-only, push schema directly
+npm run db:seed       # idempotent seed of the global permission catalog
+npm run db:studio     # inspect DB
+```
+
+Schema lives in `src/server/db/schema.ts`; generated migrations in `src/server/db/migrations`.
+
+## Implemented schema
+
+The Phase 1 schema is implemented in `src/server/db/schema.ts` (migration `0000`). Core tables:
+
+- `users` — app-level identity, mapped from Clerk via `clerk_id` (unique). Auth providers never become the domain PK.
+- `workspaces` — tenant root (`name`, `slug`, `workspace_type`, `settings`, `created_by_id`).
+- `roles` — per-workspace roles. The four built-in roles (`owner`, `admin`, `member`, `viewer`) are provisioned automatically on workspace creation.
+- `permissions` — global static capability catalog (seeded, e.g. `tasks:create`, `members:read`).
+- `role_permissions` — composite-PK join between roles and permissions.
+- `workspace_modules` — which capabilities are enabled per workspace and their config.
+- `workspace_memberships` — links users to workspaces (`status`, `role_id`), unique per (user, workspace).
+- `invitations` — email invites with an opaque `token`, status, expiry, assigned role.
+- `tasks` — title, description, status, priority, assignee, due date; `workspace_id` indexed.
+- `documents` — file metadata (`name`, `storage_key`, `mime_type`, `size_bytes`); bytes live in object storage.
+- `notifications` — per-user notifications (`user_id`, `workspace_id`, `read_at`).
+- `activity_events` — durable audit trail (`workspace_id`, `actor_id`, `action`, `entity_type`, `metadata`).
+
+Every tenant-owned table carries `workspace_id` directly, making authorization scoping and queries explicit (see `MULTITENANT.md`).
