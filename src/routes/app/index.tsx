@@ -499,16 +499,16 @@ function BoatDashboard({
   const berthEntries = records.berth?.length ?? 0
 
   return (
-    <div className="-mx-4 -mt-7 min-h-screen bg-[#eef7ff] px-4 pb-10 pt-7 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+    <div className="-mx-4 -mt-7 min-h-screen bg-[#eef7ff] px-4 pb-10 pt-7 dark:bg-[#111d2c] sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
       <section className="boat-hero relative overflow-hidden rounded-b-[2rem] px-5 pb-12 pt-6 sm:px-8">
         <div className="relative z-10 flex flex-col gap-2">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-800/70">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-800/70 dark:text-sky-200/80">
             {t('yourVessel')}
           </p>
-          <h1 className="flex items-center gap-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+          <h1 className="flex items-center gap-3 text-3xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
             {activeWorkspace.name} <span aria-hidden="true">🛥️</span>
           </h1>
-          <p className="text-sm font-medium text-slate-600 sm:text-base">
+          <p className="text-sm font-medium text-slate-600 dark:text-blue-100 sm:text-base">
             {t('keepShipshape')}
           </p>
         </div>
@@ -582,20 +582,20 @@ function BoatDashboard({
             <EmptyState icon={CheckSquare} text={t('noMaintenanceDue')} />
           )}
         </Panel>
-        <aside className="rounded-xl border border-blue-100 bg-white p-4 shadow-[0_8px_30px_rgb(15,76,129,0.08)]">
+        <aside className="rounded-xl border border-blue-100 bg-white p-4 shadow-[0_8px_30px_rgb(15,76,129,0.08)] dark:border-sky-300/15 dark:bg-[#0c2845]">
           <h2 className="font-bold tracking-tight">{t('quickActions')}</h2>
           <div className="mt-4 grid gap-2">
             <Link
               to="/app/logbook"
               search={{ ws: activeWorkspaceId }}
-              className="rounded-lg bg-blue-50 px-3 py-3 text-sm font-semibold text-blue-800 transition hover:bg-blue-100"
+              className="rounded-lg bg-blue-50 px-3 py-3 text-sm font-semibold text-blue-800 transition hover:bg-blue-100 dark:bg-sky-400/10 dark:text-sky-200 dark:hover:bg-sky-400/15"
             >
               <BookOpen className="mr-2 inline size-4" /> {t('logTrip')}
             </Link>
             <Link
               to="/app/tasks"
               search={{ ws: activeWorkspaceId }}
-              className="rounded-lg bg-blue-50 px-3 py-3 text-sm font-semibold text-blue-800 transition hover:bg-blue-100"
+              className="rounded-lg bg-blue-50 px-3 py-3 text-sm font-semibold text-blue-800 transition hover:bg-blue-100 dark:bg-sky-400/10 dark:text-sky-200 dark:hover:bg-sky-400/15"
             >
               <CheckSquare className="mr-2 inline size-4" />
               {t('addMaintenance')}
@@ -603,7 +603,7 @@ function BoatDashboard({
             <Link
               to="/app/documents"
               search={{ ws: activeWorkspaceId }}
-              className="rounded-lg bg-blue-50 px-3 py-3 text-sm font-semibold text-blue-800 transition hover:bg-blue-100"
+              className="rounded-lg bg-blue-50 px-3 py-3 text-sm font-semibold text-blue-800 transition hover:bg-blue-100 dark:bg-sky-400/10 dark:text-sky-200 dark:hover:bg-sky-400/15"
             >
               <FileText className="mr-2 inline size-4" /> {t('documents')}
             </Link>
@@ -637,21 +637,21 @@ function BoatDashboard({
             />
           )}
         </Panel>
-        <article className="rounded-xl border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgb(15,76,129,0.08)]">
+        <article className="rounded-xl border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgb(15,76,129,0.08)] dark:border-sky-300/15 dark:bg-[#0c2845]">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm font-semibold text-slate-700">
+              <p className="text-sm font-semibold text-slate-700 dark:text-sky-100">
                 {t('fuel')}
               </p>
-              <p className="mt-3 text-3xl font-bold tracking-tight text-slate-950">
+              <p className="mt-3 text-3xl font-bold tracking-tight text-slate-950 dark:text-white">
                 {t('readyToLog')}
               </p>
             </div>
-            <span className="grid size-10 place-items-center rounded-lg bg-blue-100 text-blue-700">
+            <span className="grid size-10 place-items-center rounded-lg bg-blue-100 text-blue-700 dark:bg-sky-400/15 dark:text-sky-200">
               <Fuel className="size-5" />
             </span>
           </div>
-          <div className="mt-6 h-3 overflow-hidden rounded-full bg-slate-100">
+          <div className="mt-6 h-3 overflow-hidden rounded-full bg-slate-100 dark:bg-white/10">
             <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-blue-600 to-sky-400" />
           </div>
           <p className="mt-3 text-sm text-muted-foreground">{t('fuelHint')}</p>
@@ -673,13 +673,15 @@ function BoatStat({
   icon: typeof CheckSquare
 }) {
   return (
-    <article className="rounded-xl border border-blue-100 bg-white p-4 shadow-[0_8px_30px_rgb(15,76,129,0.08)]">
-      <Icon className="size-5 text-blue-700" />
-      <p className="mt-5 text-3xl font-bold tracking-tight text-slate-950">
+    <article className="rounded-xl border border-blue-100 bg-white p-4 shadow-[0_8px_30px_rgb(15,76,129,0.08)] dark:border-sky-300/15 dark:bg-[#0c2845]">
+      <Icon className="size-5 text-blue-700 dark:text-sky-200" />
+      <p className="mt-5 text-3xl font-bold tracking-tight text-slate-950 dark:text-white">
         {value}
       </p>
-      <p className="mt-1 text-sm font-semibold text-slate-700">{label}</p>
-      <p className="mt-1 text-xs text-slate-500">{detail}</p>
+      <p className="mt-1 text-sm font-semibold text-slate-700 dark:text-sky-100">
+        {label}
+      </p>
+      <p className="mt-1 text-xs text-slate-500 dark:text-blue-200">{detail}</p>
     </article>
   )
 }

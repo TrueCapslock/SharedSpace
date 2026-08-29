@@ -139,6 +139,12 @@
     radial-gradient(ellipse at 72% 18%, rgb(255 255 255 / 92%), transparent 42%);
 }
 
+.dark .boat-hero {
+  background:
+    linear-gradient(180deg, rgb(11 42 69 / 96%), rgb(16 61 99 / 92%)),
+    radial-gradient(ellipse at 72% 18%, rgb(73 160 213 / 24%), transparent 42%);
+}
+
 .boat-wave {
   position: absolute;
   left: -10%;

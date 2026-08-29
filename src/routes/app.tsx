@@ -7,6 +7,7 @@ import {
 } from '@tanstack/react-router'
 import { useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
+import { useClerk } from '@clerk/tanstack-react-start'
 import {
   Bell,
   Anchor,
@@ -24,6 +25,7 @@ import {
   FileText,
   LayoutDashboard,
   ListTodo,
+  LogOut,
   Monitor,
   Moon,
   Plus,
@@ -179,6 +181,17 @@ function Brand() {
   )
 }
 
+function LogoutMenuItem() {
+  const { signOut } = useClerk()
+  const { t } = useI18n()
+
+  return (
+    <DropdownMenuItem onSelect={() => signOut({ redirectUrl: '/' })}>
+      <LogOut /> {t('signOut')}
+    </DropdownMenuItem>
+  )
+}
+
 function AppLayout() {
   const { user, workspaces } = Route.useLoaderData()
   const search = useSearch({ from: '/app' })
@@ -250,9 +263,14 @@ function AppLayout() {
         <p className="text-muted-foreground">
           Sign in to view your shared workspaces and collaborate with your team.
         </p>
-        <Button onClick={() => navigate({ to: '/' })} variant="outline">
-          Back to home
-        </Button>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link to="/sign-in/$" params={{ _splat: '' }}>
+            <Button>{t('signIn')}</Button>
+          </Link>
+          <Button onClick={() => navigate({ to: '/' })} variant="outline">
+            Back to home
+          </Button>
+        </div>
       </main>
     )
   }
@@ -264,6 +282,10 @@ function AppLayout() {
       replace: true,
     })
   }
+
+  const dropdownContentClass = isBoatWorkspace
+    ? 'border border-white/15 bg-[#0a4a86] text-white shadow-xl [&_[data-slot=dropdown-menu-label]]:text-blue-200 [&_[data-slot=dropdown-menu-separator]]:bg-white/20 [&_[data-highlighted]]:bg-white/15 [&_[data-highlighted]]:text-white'
+    : ''
 
   return (
     <WorkspaceContext.Provider value={value}>
@@ -285,7 +307,9 @@ function AppLayout() {
               >
                 <Bell className="size-4" />
                 {(unreadNotifications.data ?? 0) > 0 && (
-                  <span className="absolute right-2 top-2 size-1.5 rounded-full bg-rose-500 ring-2 ring-white dark:ring-[#091520]" />
+                  <span
+                    className={`absolute right-2 top-2 size-1.5 rounded-full bg-rose-500 ring-2 ${isBoatWorkspace ? 'ring-[#063568]' : 'ring-white dark:ring-[#091520]'}`}
+                  />
                 )}
               </Link>
             </div>
@@ -295,7 +319,7 @@ function AppLayout() {
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="ghost"
-                    className={`h-auto w-full justify-between rounded-xl border px-2 py-2 text-left ${isBoatWorkspace ? 'border-white/15 bg-white/5 hover:bg-white/10' : 'border-slate-200/80 bg-white/50 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/8'}`}
+                    className={`h-auto w-full justify-between rounded-xl border px-2 py-2 text-left ${isBoatWorkspace ? 'border-white/15 bg-white/5 hover:bg-white/10 aria-expanded:bg-white/10' : 'border-slate-200/80 bg-white/50 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/8'}`}
                   >
                     <span className="flex min-w-0 items-center gap-2.5">
                       {isBoatWorkspace ? (
@@ -325,7 +349,10 @@ function AppLayout() {
                     />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="start" className="w-56">
+                <DropdownMenuContent
+                  align="start"
+                  className={`w-56 ${dropdownContentClass}`}
+                >
                   <DropdownMenuLabel>Workspaces</DropdownMenuLabel>
                   {workspaces?.map((workspace) => (
                     <DropdownMenuItem
@@ -340,7 +367,12 @@ function AppLayout() {
                   ))}
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
-                    onSelect={() => navigate({ to: '/app/settings' })}
+                    onSelect={() =>
+                      navigate({
+                        to: '/app/settings',
+                        search: { ws: activeWorkspaceId },
+                      })
+                    }
                   >
                     <Plus /> New workspace
                   </DropdownMenuItem>
@@ -390,7 +422,7 @@ function AppLayout() {
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="ghost"
-                    className={`h-auto w-full justify-between px-2 py-2 text-left ${isBoatWorkspace ? 'hover:bg-white/10' : 'hover:bg-slate-100 dark:hover:bg-white/8'}`}
+                    className={`h-auto w-full justify-between px-2 py-2 text-left ${isBoatWorkspace ? 'hover:bg-white/10 aria-expanded:bg-white/10' : 'hover:bg-slate-100 dark:hover:bg-white/8'}`}
                   >
                     <span className="flex min-w-0 items-center gap-2.5">
                       <span className="grid size-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-blue-500 to-emerald-500 text-xs font-bold text-white">
@@ -414,10 +446,15 @@ function AppLayout() {
                     />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="start" className="w-52">
+                <DropdownMenuContent
+                  align="start"
+                  className={`w-52 ${dropdownContentClass}`}
+                >
                   <DropdownMenuLabel>
                     <span className="block truncate">{user.displayName}</span>
-                    <span className="block text-xs font-normal text-muted-foreground">
+                    <span
+                      className={`block text-xs font-normal ${isBoatWorkspace ? 'text-blue-200' : 'text-muted-foreground'}`}
+                    >
                       {t('accountMenu')}
                     </span>
                   </DropdownMenuLabel>
@@ -461,17 +498,26 @@ function AppLayout() {
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
-                    onSelect={() => navigate({ to: '/app/profile' })}
+                    onSelect={() =>
+                      navigate({
+                        to: '/app/profile',
+                        search: { ws: activeWorkspaceId },
+                      })
+                    }
                   >
                     <User /> Profile
                   </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <LogoutMenuItem />
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
           </aside>
 
           <div className="flex min-w-0 flex-1 flex-col">
-            <header className="sticky top-0 z-20 flex h-[76px] items-center border-b border-slate-200/70 bg-white/75 px-4 backdrop-blur-xl dark:border-white/5 dark:bg-[#091520]/80 lg:hidden">
+            <header
+              className={`sticky top-0 z-20 flex h-[76px] items-center border-b px-4 backdrop-blur-xl lg:hidden ${isBoatWorkspace ? 'border-white/10 bg-[#063568]/95 text-white' : 'border-slate-200/70 bg-white/75 dark:border-white/5 dark:bg-[#091520]/80'}`}
+            >
               <div className="lg:hidden">
                 <Brand />
               </div>

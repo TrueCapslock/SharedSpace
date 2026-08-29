@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 
 export type Locale = 'en' | 'no'
 
-const translations = {
+export const translations = {
   en: {
     language: 'Language',
     english: 'English',
@@ -30,6 +30,8 @@ const translations = {
     berths: 'Harbour & berth',
     insights: 'Insights',
     accountMenu: 'Account menu',
+    signIn: 'Sign in',
+    signOut: 'Log out',
     yourVessel: 'Your vessel',
     keepShipshape: 'Keep every trip, task, and detail shipshape.',
     logbookEntries: 'Logbook entries',
@@ -439,6 +441,8 @@ const translations = {
     berths: 'Havn og plass',
     insights: 'Innsikt',
     accountMenu: 'Kontomeny',
+    signIn: 'Logg inn',
+    signOut: 'Logg ut',
     yourVessel: 'Din båt',
     keepShipshape: 'Hold turer, oppgaver og detaljer i orden.',
     logbookEntries: 'Loggbokføringer',
