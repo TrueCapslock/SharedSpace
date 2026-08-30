@@ -1,11 +1,26 @@
 import { describe, expect, it } from 'vitest'
 
 import {
+  dashboardWidgets,
   getCustomWorkspaceTemplate,
   getModulePool,
   getWorkspaceSettings,
+  getWorkspaceTemplate,
   workspaceModuleKeys,
+  workspaceThemes,
 } from './templates'
+
+type WorkspaceType = Parameters<typeof getWorkspaceTemplate>[0]
+
+const workspaceTypes: WorkspaceType[] = [
+  'housing_board',
+  'cabin',
+  'boat',
+  'project',
+  'agile_project',
+  'association',
+  'custom',
+]
 
 describe('workspace templates', () => {
   it('limits non-custom workspaces to their template module pool', () => {
@@ -81,5 +96,48 @@ describe('workspace templates', () => {
         'activity',
       ],
     })
+  })
+})
+
+describe('all workspace templates', () => {
+  it('uses only valid modules, widgets and themes', () => {
+    for (const type of workspaceTypes) {
+      const template = getWorkspaceTemplate(type)
+
+      expect(
+        template.modules.every((module) =>
+          workspaceModuleKeys.includes(module),
+        ),
+      ).toBe(true)
+      expect(
+        template.dashboardWidgets.every((widget) =>
+          dashboardWidgets.includes(widget),
+        ),
+      ).toBe(true)
+      expect(workspaceThemes).toContain(template.theme)
+    }
+  })
+
+  it('keeps every template module set inside its module pool', () => {
+    for (const type of workspaceTypes) {
+      const template = getWorkspaceTemplate(type)
+      const pool = getModulePool(type)
+
+      expect(pool).toEqual(expect.arrayContaining(template.modules))
+    }
+  })
+
+  it('normalizes invalid settings back to template defaults', () => {
+    const settings = getWorkspaceSettings('boat', {
+      theme: 'neon',
+      modules: ['hacking', 'logbook'],
+      moduleOrder: ['hacking'],
+      dashboardWidgets: ['hacking'],
+    })
+
+    expect(settings.theme).toBe('harbor')
+    expect(settings.modules).toEqual(['logbook'])
+    expect(settings.moduleOrder).toEqual(['logbook'])
+    expect(settings.dashboardWidgets).toEqual([])
   })
 })
