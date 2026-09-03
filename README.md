@@ -58,6 +58,46 @@ Pricing and free-tier limits change over time. Before production launch, verify 
 
 Vercel Hobby is intended for personal, non-commercial projects. It is suitable while SharedSpace is being developed as a personal project, but a commercial SharedSpace deployment must use an appropriate paid Vercel plan or an alternative hosting platform.
 
+## Disposable test database
+
+Integration and end-to-end tests must use the isolated PostgreSQL container on
+port `5433`, never the local development database on port `5432`. The test
+container stores its data in Docker `tmpfs`, so its data is discarded whenever
+the container is removed.
+
+```bash
+npm run db:test:up
+npm run db:test:migrate
+```
+
+Reset it to a clean schema between test runs:
+
+```bash
+npm run db:test:reset
+```
+
+Remove it after testing:
+
+```bash
+npm run db:test:down
+```
+
+Use the `DATABASE_URL` from `.env.test.example` when running an integration
+test or local end-to-end server. Do not put production credentials in `.env.test`.
+
+Run the test suites:
+
+```bash
+npm test
+npm run test:coverage
+npm run test:integration
+npm run test:e2e
+```
+
+The Playwright smoke suite covers public and anonymous app access. Authenticated
+end-to-end flows require Clerk test credentials and an isolated test user; they
+must not use a production Clerk instance.
+
 ## Core domain concept
 
 The primary tenant boundary is a `Workspace`.

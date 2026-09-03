@@ -7,7 +7,7 @@ import {
   updateTask,
 } from '#/server/tasks/service'
 
-const workspaceIdSchema = z.object({ workspaceId: z.string().uuid() })
+export const workspaceIdSchema = z.object({ workspaceId: z.string().uuid() })
 
 export const getTasks = createServerFn({ method: 'GET' })
   .validator(workspaceIdSchema)

@@ -28,7 +28,7 @@ export const workspaceRecordTypes = [
   'insight',
 ] as const
 
-const recordInput = z.object({
+export const recordInputSchema = z.object({
   workspaceId: z.string().uuid(),
   type: z.enum(workspaceRecordTypes),
   title: z.string().trim().min(1).max(255),
@@ -59,7 +59,7 @@ export const getWorkspaceRecords = createServerFn({ method: 'GET' })
   )
 
 export const createWorkspaceRecordFn = createServerFn({ method: 'POST' })
-  .validator(recordInput)
+  .validator(recordInputSchema)
   .handler(async ({ data }) =>
     createWorkspaceRecord(data.workspaceId, {
       ...data,
@@ -70,7 +70,7 @@ export const createWorkspaceRecordFn = createServerFn({ method: 'POST' })
 
 export const updateWorkspaceRecordFn = createServerFn({ method: 'POST' })
   .validator(
-    recordInput
+    recordInputSchema
       .partial()
       .extend({ workspaceId: z.string().uuid(), recordId: z.string().uuid() }),
   )
@@ -81,6 +81,7 @@ export const updateWorkspaceRecordFn = createServerFn({ method: 'POST' })
       status: data.status,
       amount: data.amount,
       occurredAt: data.occurredAt ? new Date(data.occurredAt) : undefined,
+      metadata: data.metadata ?? undefined,
     }).then(serializeRecord),
   )
 

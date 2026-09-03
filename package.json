@@ -14,6 +14,9 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:integration": "npm run db:test:reset && vitest run --config vitest.integration.config.ts",
+    "test:e2e": "npm run db:test:reset && playwright test",
     "format": "prettier --write . && eslint --fix",
     "check": "prettier --check .",
     "db:generate": "drizzle-kit generate",
@@ -23,7 +26,11 @@
     "db:seed": "tsx src/server/db/seed.ts",
     "db:search-index": "tsx src/server/db/search-index.ts",
     "db:backfill:modules": "tsx src/server/db/backfill-modules.ts",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "db:test:up": "docker compose -f docker-compose.test.yml up --detach --wait",
+    "db:test:down": "docker compose -f docker-compose.test.yml down --volumes --remove-orphans",
+    "db:test:migrate": "DATABASE_URL=postgresql://sharedspace_test:sharedspace_test@localhost:5433/sharedspace_test tsx src/server/db/migrate.ts",
+    "db:test:reset": "npm run db:test:down && npm run db:test:up && npm run db:test:migrate"
   },
   "dependencies": {
     "@clerk/backend": "^3.16.12",
@@ -56,10 +63,14 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/typography": "^0.5.16",
     "@tanstack/devtools-vite": "latest",
     "@tanstack/eslint-config": "latest",
     "@tanstack/router-cli": "^1.132.0",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
     "@types/node": "^22.10.2",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
@@ -68,6 +79,7 @@
     "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.10",
     "eslint": "^9.20.0",
+    "jsdom": "^30.0.1",
     "prettier": "^3.8.1",
     "tsx": "^4.23.12",
     "typescript": "^6.0.2",
